@@ -22,7 +22,6 @@
 package com.leanplum.internal;
 
 import android.content.SharedPreferences;
-import android.util.Pair;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
@@ -41,6 +40,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import androidx.core.util.Pair;
 
 /**
  * AES Encryption as detailed at

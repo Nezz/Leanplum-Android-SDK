@@ -32,13 +32,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -62,7 +63,7 @@ public class LeanplumEventDataManagerTest {
    */
   @Before
   public void setUp() {
-    this.mContext = RuntimeEnvironment.application;
+    this.mContext = ApplicationProvider.getApplicationContext();
     assertNotNull(this.mContext);
     Leanplum.setApplicationContext(this.mContext);
   }

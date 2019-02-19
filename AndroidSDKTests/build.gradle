@@ -4,12 +4,17 @@ apply from: "../common-methods.gradle"
 android {
     compileSdkVersion COMPILE_SDK_VERSION
 
+    testOptions.unitTests.includeAndroidResources = true
+
     defaultConfig {
         applicationId "com.leanplum.tests"
         targetSdkVersion COMPILE_SDK_VERSION
         minSdkVersion MIN_SDK_VERSION
         versionCode 1
-        versionName "1.0"
+
+        useLibrary 'android.test.runner'
+        useLibrary 'android.test.base'
+        useLibrary 'android.test.mock'
     }
     buildTypes {
         release {
@@ -50,19 +55,28 @@ dependencies {
     implementation 'com.google.android.gms:play-services-gcm:11.6.0'
     implementation 'com.google.android.gms:play-services-location:11.6.0'
 
-    // Dependencies used for unit tests.
-    testImplementation 'junit:junit:4.12'
-    testImplementation('org.robolectric:robolectric:4.1') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
+    // AndroidJUnitRunner and JUnit Rules
+    // AndroidJUnitRunner and JUnit Rules
+    testImplementation 'org.robolectric:robolectric:4.2'
     testImplementation 'org.robolectric:shadows-play-services:3.3.2'
     testImplementation 'org.mockito:mockito-core:1.10.19'
     testImplementation 'org.powermock:powermock-module-junit4:1.6.6'
     testImplementation 'org.powermock:powermock-module-junit4-rule:1.6.6'
     testImplementation 'org.powermock:powermock-api-mockito:1.6.6'
     testImplementation 'org.powermock:powermock-classloading-xstream:1.6.6'
-    testImplementation 'org.bouncycastle:bcmail-jdk15on:1.54'
+    testImplementation 'androidx.test:core:1.1.0'
+    testImplementation "androidx.test:monitor:1.1.1"
+    testImplementation "androidx.test:runner:1.1.1"
+    testImplementation "androidx.test:rules:1.1.1"
+    testImplementation "androidx.test.ext:truth:1.1.0"
+
+    androidTestImplementation "androidx.test:monitor:1.1.1"
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+
+
+
 }
 
 task jarTests(type: Jar, dependsOn: "assembleDebugUnitTest") {
